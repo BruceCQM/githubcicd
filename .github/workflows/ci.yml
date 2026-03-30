@@ -1,0 +1,38 @@
+# 工作流名称
+name: CI
+
+# 触发条件
+on:
+  pull_request:  # 当有 PR 时触发
+  push:          # 当有推送时触发
+    branches: [main]  # 仅在 main 分支触发
+
+# 权限设置
+permissions:
+  contents: read  # 只读权限
+
+# 并发控制
+concurrency:
+  group: ci-${{ github.ref }}  # 并发组名
+  cancel-in-progress: true     # 取消正在进行的相同任务
+
+# 任务定义
+jobs:
+  vite_react:  # 任务名称
+    runs-on: ubuntu-latest  # 运行环境
+    steps:  # 执行步骤
+      - uses: actions/checkout@v4  # 检出代码
+      
+      - uses: actions/setup-node@v4  # 设置 Node.js
+        with:  # 配置参数
+          node-version: 20
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+      
+      # 执行命令
+      - run: corepack enable
+      - run: pnpm --version
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run lint --if-present
+      - run: pnpm run test:ci  # 运行测试
+      - run: pnpm run build    # 构建项目
