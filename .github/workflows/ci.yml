@@ -23,6 +23,9 @@ jobs:
     # 为整个 CI 工作流提供运行环境，确保所有命令和操作都在一致的系统环境中执行
     # Ubuntu 是 GitHub Actions 最常用的环境，因为它稳定且支持大多数开发工具
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true  # 强制使用 Node.js 24
+    
     steps:  # 执行步骤
       # 将仓库中的代码文件复制到 CI 运行环境中
       - uses: actions/checkout@v4  # 检出代码
