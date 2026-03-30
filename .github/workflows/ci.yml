@@ -19,13 +19,17 @@ concurrency:
 # 任务定义
 jobs:
   vite_react:  # 任务名称
-    runs-on: ubuntu-latest  # 运行环境
+    # 指定 CI 工作流运行的操作系统环境，使用最新版本的 Ubuntu Linux 操作系统
+    # 为整个 CI 工作流提供运行环境，确保所有命令和操作都在一致的系统环境中执行
+    # Ubuntu 是 GitHub Actions 最常用的环境，因为它稳定且支持大多数开发工具
+    runs-on: ubuntu-latest
     steps:  # 执行步骤
+      # 将仓库中的代码文件复制到 CI 运行环境中
       - uses: actions/checkout@v4  # 检出代码
       
       - uses: actions/setup-node@v4  # 设置 Node.js
         with:  # 配置参数
-          node-version: 20
+          node-version: 24
           cache: npm
       
       # 执行命令
