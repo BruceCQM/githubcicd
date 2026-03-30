@@ -26,13 +26,11 @@ jobs:
       - uses: actions/setup-node@v4  # 设置 Node.js
         with:  # 配置参数
           node-version: 20
-          cache: pnpm
-          cache-dependency-path: pnpm-lock.yaml
+          cache: npm
       
       # 执行命令
-      - run: corepack enable
-      - run: pnpm --version
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm run lint --if-present
-      - run: pnpm run test:ci  # 运行测试
-      - run: pnpm run build    # 构建项目
+      - run: npm --version
+      - run: npm ci  # 安装依赖（使用 package-lock.json 锁定版本）
+      - run: npm run lint --if-present
+      - run: npm run test:ci  # 运行测试
+      - run: npm run build    # 构建项目
