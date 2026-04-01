@@ -1,8 +1,8 @@
-name: 构建并部署到 GitHub Pages
+name: Deploy
 
 on:
   push:
-    branches: [master]  # 你的主分支名
+    branches: [master, main]  # 你的主分支名
   workflow_dispatch:
 
 permissions:
