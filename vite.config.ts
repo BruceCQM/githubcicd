@@ -4,8 +4,8 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/githubcicd/',
-  build: {
-    assetsInlineLimit: 0
-  }
+  // base: '/githubcicd/',
+  // build: {
+  //   assetsInlineLimit: 0
+  // }
 })
